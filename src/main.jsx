@@ -1,8 +1,15 @@
+import React, { useEffect } from 'react';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
 const navItems = [
+  { label: 'Home', href: '#home', animation: 'nav-home' },
+  { label: 'About', href: '#about', animation: 'nav-about' },
+  { label: 'Skills', href: '#skills', animation: 'nav-skills' },
+  { label: 'Projects', href: '#projects', animation: 'nav-projects' },
+  { label: 'Experience', href: '#experience', animation: 'nav-experience' },
+  { label: 'Contact', href: '#contact', animation: 'nav-contact' },
   ['Home', '#home'],
   ['About', '#about'],
   ['Skills', '#skills'],
@@ -21,6 +28,10 @@ function Header() {
         <strong>Abhishek Ghalan</strong>
       </a>
       <nav aria-label="Primary navigation">
+        {navItems.map(({ label, href, animation }) => (
+          <a key={label} className={`nav-link ${animation}`} href={href}>
+            <span>{label}</span>
+          </a>
         {navItems.map(([label, href]) => (
           <a key={label} href={href}>{label}</a>
         ))}
@@ -31,6 +42,7 @@ function Header() {
 
 function Hero() {
   return (
+    <section id="home" className="hero section-shell scroll-section is-visible" data-scroll-section>
     <section id="home" className="hero section-shell">
       <div className="hero-copy">
         <p className="eyebrow">Personal Branding Portfolio</p>
@@ -59,6 +71,7 @@ function Hero() {
 
 function Section({ id, eyebrow, title, children }) {
   return (
+    <section id={id} className="section-shell content-section scroll-section" data-scroll-section>
     <section id={id} className="section-shell content-section">
       <p className="eyebrow">{eyebrow}</p>
       <h2>{title}</h2>
@@ -68,6 +81,24 @@ function Section({ id, eyebrow, title, children }) {
 }
 
 function App() {
+  useEffect(() => {
+    const sections = document.querySelectorAll('[data-scroll-section]');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        } else {
+          entry.target.classList.remove('is-visible');
+        }
+      });
+    }, { threshold: 0.28, rootMargin: '-8% 0px -18% 0px' });
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       <Header />
