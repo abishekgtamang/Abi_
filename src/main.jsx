@@ -3,12 +3,12 @@ import { createRoot } from 'react-dom/client';
 import './styles.css';
 
 const navItems = [
-  { label: 'Home', href: '#home', animation: 'nav-home' },
-  { label: 'About', href: '#about', animation: 'nav-about' },
-  { label: 'Skills', href: '#skills', animation: 'nav-skills' },
-  { label: 'Projects', href: '#projects', animation: 'nav-projects' },
-  { label: 'Experience', href: '#experience', animation: 'nav-experience' },
-  { label: 'Contact', href: '#contact', animation: 'nav-contact' },
+  ['Home', '#home'],
+  ['About', '#about'],
+  ['Skills', '#skills'],
+  ['Projects', '#projects'],
+  ['Experience', '#experience'],
+  ['Contact', '#contact'],
 ];
 
 const skills = ['HTML', 'CSS', 'JavaScript', 'Adobe Creative Suite'];
@@ -21,10 +21,8 @@ function Header() {
         <strong>Abhishek Ghalan</strong>
       </a>
       <nav aria-label="Primary navigation">
-        {navItems.map(({ label, href, animation }) => (
-          <a key={label} className={`nav-link ${animation}`} href={href}>
-            <span>{label}</span>
-          </a>
+        {navItems.map(([label, href]) => (
+          <a key={label} href={href}>{label}</a>
         ))}
       </nav>
     </header>
