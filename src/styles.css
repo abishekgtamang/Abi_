@@ -252,6 +252,13 @@ nav { flex-wrap: wrap; justify-content: flex-end; }
     filter: none;
   }
 }
+nav a {
+  color: var(--muted);
+  font-size: 0.93rem;
+  font-weight: 600;
+}
+
+nav a:hover { color: var(--purple); }
 
 .section-shell {
   width: min(1120px, calc(100% - 2rem));

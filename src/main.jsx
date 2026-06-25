@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
@@ -9,6 +10,12 @@ const navItems = [
   { label: 'Projects', href: '#projects', animation: 'nav-projects' },
   { label: 'Experience', href: '#experience', animation: 'nav-experience' },
   { label: 'Contact', href: '#contact', animation: 'nav-contact' },
+  ['Home', '#home'],
+  ['About', '#about'],
+  ['Skills', '#skills'],
+  ['Projects', '#projects'],
+  ['Experience', '#experience'],
+  ['Contact', '#contact'],
 ];
 
 const skills = ['HTML', 'CSS', 'JavaScript', 'Adobe Creative Suite'];
@@ -25,6 +32,8 @@ function Header() {
           <a key={label} className={`nav-link ${animation}`} href={href}>
             <span>{label}</span>
           </a>
+        {navItems.map(([label, href]) => (
+          <a key={label} href={href}>{label}</a>
         ))}
       </nav>
     </header>
@@ -34,6 +43,7 @@ function Header() {
 function Hero() {
   return (
     <section id="home" className="hero section-shell scroll-section is-visible" data-scroll-section>
+    <section id="home" className="hero section-shell">
       <div className="hero-copy">
         <p className="eyebrow">Personal Branding Portfolio</p>
         <h1>Developer and Designer crafting clear, polished digital experiences.</h1>
@@ -62,6 +72,7 @@ function Hero() {
 function Section({ id, eyebrow, title, children }) {
   return (
     <section id={id} className="section-shell content-section scroll-section" data-scroll-section>
+    <section id={id} className="section-shell content-section">
       <p className="eyebrow">{eyebrow}</p>
       <h2>{title}</h2>
       {children}
